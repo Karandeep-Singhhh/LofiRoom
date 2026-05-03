@@ -7,12 +7,14 @@ import ProjectPoster from '@/components/ProjectPoster'
 import ProjectModal from '@/components/ProjectModal'
 import { projects, type Project } from '@/data/projects'
 import ContactMenu from '@/components/ContactMenu'
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   return (
     <main className="relative w-screen h-screen overflow-hidden bg-black">
+      <Analytics />
       <Image
         src="/images/room.jpg"
         alt="Lofi room workspace"
