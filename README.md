@@ -2,7 +2,7 @@
 
 An interactive portfolio site built as an explorable lofi room. Project posters sit on the wall like album cover posters I own myself! Click each one to zoom in and read the tracklist :D
 
-[Live site](https://lofi-portfolio.vercel.app)
+[Live site](https://www.kdsingh.dev)
 
 ## Why this exists
 
