@@ -22,7 +22,7 @@ export default function ContactMenu() {
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col-reverse gap-2 items-end">
       <a
-        href="/karandeep-resume.pdf"
+        href="/KarandeepSingh_Resume.pdf"
         target="_blank"
         rel="noopener noreferrer"
         className={baseClass}
