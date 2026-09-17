@@ -56,7 +56,7 @@ next iteration:
 - **Desk hotspots.** Click the cat to make it meow. Click the window to toggle rain. Click the lamp to dim the lighting. Click the monitor to see recent GitHub activity. Building these as a system rather than piecemeal.
 - **Per-project bullet expansion.** Inside each project modal, clicking a tracklist bullet expands it into a brief technical writeup. Three levels of zoom: wall → poster → bullet detail.
 - **Mobile redesign.** V1 is desktop-only by design. V2 needs a real mobile experience, likely as a vertical-scroll narrative rather than a recreation of the room layout. It would have more emphasis on th professional mode though, as the app is meant to be a desktop application.
-- **Signature and barcode/QR.** Small details to round out the album-cover homage. Signature written on iPad, exported as a transparent PNG. QR codes on each poster that open the GitHub repo when scanned by phone camera.
+- **Signature and barcode/QR.** Small details to round out the album-cover homage. QR codes on each poster that open the GitHub repo when scanned by phone camera.
 - **Audio system.** Currently one looping track with a play/pause toggle. V2 has a small playlist, fade transitions between tracks, and ambient sound layers (rain, coffee shop, etc.) that combine with the music.
 
 ## Local development
