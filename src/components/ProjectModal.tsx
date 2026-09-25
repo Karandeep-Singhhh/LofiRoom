@@ -37,38 +37,41 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           <motion.div
             layoutId={`poster-${project.id}`}
             onClick={(e) => e.stopPropagation()}
-            className="relative bg-[#e8e8e8] rounded-sm overflow-hidden shadow-2xl w-[min(530px,90vw)] aspect-2/3 mobile:w-[min(530px,calc(100vw-28px))] mobile:aspect-auto"
+            className="relative bg-[#e8e8e8] rounded-sm overflow-hidden shadow-2xl w-[min(530px,90vw)] aspect-2/3 max-h-[92dvh] mobile:w-[min(530px,calc(100vw-28px))] mobile:aspect-auto mobile:max-h-none"
           >
-            {/* Album poster layout */}
-            <div className="absolute inset-0 flex flex-col p-6 text-black overflow-hidden mobile:relative mobile:max-h-[calc(100dvh-5rem)] mobile:overflow-y-auto mobile:overscroll-contain mobile:pb-0">
+            {/* Album poster layout (scrolls only if the screen is too short for everything) */}
+            <div className="absolute inset-0 flex flex-col p-6 text-black overflow-y-auto mobile:relative mobile:max-h-[calc(100dvh-5rem)] mobile:overscroll-contain mobile:pb-0">
               {/* Title */}
               <h2 className="text-center text-2xl font-bold tracking-tight mb-3 mobile:px-8">
                 {project.title}
               </h2>
 
-              {/* Cover art */}
-              <div className="relative w-3/4 mx-auto aspect-square mb-4 border border-black/20 shrink-0 mobile:w-2/3">
-                <Image
-                  src={project.posterImage}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                  sizes="420px"
-                />
+              {/* Cover art — takes whatever height the tracklist leaves (up to 3/4 width),
+                  so every track stays visible and the card fits short laptop screens */}
+              <div className="flex-1 min-h-30 mb-4 @container-[size] mobile:flex-none mobile:@container-normal">
+                <div className="relative mx-auto aspect-square w-[min(100cqh,75cqw)] border border-black/20 mobile:w-2/3">
+                  <Image
+                    src={project.posterImage}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    sizes="420px"
+                  />
+                </div>
               </div>
 
               {/* Tracklist + palette/artist row */}
               {/* (mobile: artist row stacks above a full-width tracklist) */}
-              <div className="flex gap-4 mb-4 flex-1 min-h-0 mobile:flex-col-reverse mobile:flex-none mobile:gap-3">
+              <div className="flex gap-4 mb-4 shrink-0 mobile:flex-col-reverse mobile:gap-3">
                 {/* Tracklist on left */}
-                <div className="flex-1 text-[13px] leading-snug font-medium space-y-0.5 overflow-hidden mobile:overflow-visible mobile:space-y-1.5">
+                <div className="flex-1 text-[13px] leading-snug font-medium space-y-0.5 mobile:space-y-1.5">
                   {project.tracklist.map((track, i) => (
                     <div key={i}>{track}</div>
                   ))}
                 </div>
 
-                {/* Right column: palette + artist */}
-                <div className="flex flex-col items-end gap-2 shrink-0 mobile:flex-row-reverse mobile:justify-between mobile:pb-3 mobile:border-b mobile:border-black/20">
+                {/* Right column: palette + artist (narrow, so long titles wrap instead of squeezing the tracklist) */}
+                <div className="flex flex-col items-end gap-2 shrink-0 max-w-36 mobile:max-w-none mobile:flex-row-reverse mobile:justify-between mobile:pb-3 mobile:border-b mobile:border-black/20">
                   {/* Tech stack as color swatches */}
                   <div className="flex gap-1">
                     {project.techStack.map((tech) => (
