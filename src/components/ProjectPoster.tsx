@@ -18,10 +18,11 @@ export default function ProjectPoster({ project, onClick }: ProjectPosterProps) 
       whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       className="flex flex-col items-center cursor-pointer focus:outline-none"
-      style={{ width: '80px' }}
+      style={{ width: 'var(--poster-width, 80px)' }}
     >
+      {/* Phones have no hover, so the posters pulse to show they're tappable */}
       <div
-        className="relative rounded-sm overflow-hidden w-full"
+        className="relative rounded-sm overflow-hidden w-full mobile:animate-poster-glow"
         style={{ aspectRatio: '2 / 3' }}
       >
         <Image
@@ -39,7 +40,11 @@ export default function ProjectPoster({ project, onClick }: ProjectPosterProps) 
       </div>
       <span
         className="text-white font-Bungee text-center leading-tight mt-1.5"
-        style={{ fontSize: '12px', letterSpacing: '0.06em', maxWidth: '80px' }}
+        style={{
+          fontSize: 'var(--poster-font-size, 12px)',
+          letterSpacing: '0.06em',
+          maxWidth: 'var(--poster-width, 80px)',
+        }}
       >
         {project.title}
       </span>

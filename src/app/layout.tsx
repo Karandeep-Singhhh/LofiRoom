@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bungee } from "next/font/google";
 import "./globals.css";
 
@@ -26,6 +26,11 @@ export const metadata: Metadata = {
     description: "An interactive lofi room showcasing my work in machine learning, computer vision, and full-stack development!",
     type: "website",
   },
+};
+
+// Lets the mobile contact bar pad itself clear of the iPhone home indicator
+export const viewport: Viewport = {
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

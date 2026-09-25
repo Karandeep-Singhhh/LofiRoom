@@ -33,24 +33,21 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Darkened backdrop with blur */}
           <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
 
+          {/* Mobile: the fixed 2:3 card can't fit the tracklist, so it becomes a scrolling column */}
           <motion.div
             layoutId={`poster-${project.id}`}
             onClick={(e) => e.stopPropagation()}
-            className="relative bg-[#e8e8e8] rounded-sm overflow-hidden shadow-2xl"
-            style={{
-              width: 'min(530px, 90vw)',
-              aspectRatio: '2 / 3',
-            }}
+            className="relative bg-[#e8e8e8] rounded-sm overflow-hidden shadow-2xl w-[min(530px,90vw)] aspect-2/3 mobile:w-[min(530px,calc(100vw-28px))] mobile:aspect-auto"
           >
             {/* Album poster layout */}
-            <div className="absolute inset-0 flex flex-col p-6 text-black overflow-hidden">
+            <div className="absolute inset-0 flex flex-col p-6 text-black overflow-hidden mobile:relative mobile:max-h-[calc(100dvh-5rem)] mobile:overflow-y-auto mobile:overscroll-contain mobile:pb-0">
               {/* Title */}
-              <h2 className="text-center text-2xl font-bold tracking-tight mb-3">
+              <h2 className="text-center text-2xl font-bold tracking-tight mb-3 mobile:px-8">
                 {project.title}
               </h2>
 
               {/* Cover art */}
-              <div className="relative w-3/4 mx-auto aspect-square mb-4 border border-black/20 shrink-0">
+              <div className="relative w-3/4 mx-auto aspect-square mb-4 border border-black/20 shrink-0 mobile:w-2/3">
                 <Image
                   src={project.posterImage}
                   alt={project.title}
@@ -61,16 +58,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
 
               {/* Tracklist + palette/artist row */}
-              <div className="flex gap-4 mb-4 flex-1 min-h-0">
+              {/* (mobile: artist row stacks above a full-width tracklist) */}
+              <div className="flex gap-4 mb-4 flex-1 min-h-0 mobile:flex-col-reverse mobile:flex-none mobile:gap-3">
                 {/* Tracklist on left */}
-                <div className="flex-1 text-[13px] leading-snug font-medium space-y-0.5 overflow-hidden">
+                <div className="flex-1 text-[13px] leading-snug font-medium space-y-0.5 overflow-hidden mobile:overflow-visible mobile:space-y-1.5">
                   {project.tracklist.map((track, i) => (
                     <div key={i}>{track}</div>
                   ))}
                 </div>
 
                 {/* Right column: palette + artist */}
-                <div className="flex flex-col items-end gap-2 shrink-0">
+                <div className="flex flex-col items-end gap-2 shrink-0 mobile:flex-row-reverse mobile:justify-between mobile:pb-3 mobile:border-b mobile:border-black/20">
                   {/* Tech stack as color swatches */}
                   <div className="flex gap-1">
                     {project.techStack.map((tech) => (
@@ -84,7 +82,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   </div>
 
                   {/* Artist name */}
-                  <div className="text-right">
+                  <div className="text-right mobile:text-left">
                     <div className="text-xs font-semibold tracking-wider">
                       KARANDEEP SINGH
                     </div>
@@ -114,14 +112,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
               </div>
 
-              {/* Action buttons - GitHub, Demo */}
-              <div className="flex gap-2 mt-3">
+              {/* Action buttons - GitHub, Demo (mobile: pinned to the bottom while the card scrolls) */}
+              <div className="flex gap-2 mt-3 mobile:sticky mobile:bottom-0 mobile:-mx-6 mobile:px-6 mobile:pt-3 mobile:pb-4 mobile:mt-4 mobile:bg-[#e8e8e8] mobile:border-t mobile:border-black/15">
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex-1 text-center text-xs font-semibold tracking-wider py-2 border border-black/40 hover:bg-black hover:text-[#f5f0e8] transition-colors"
+                  className="flex-1 text-center text-xs font-semibold tracking-wider py-2 border border-black/40 hover:bg-black hover:text-[#f5f0e8] transition-colors mobile:py-3.5"
                 >
                   VIEW ON GITHUB
                 </a>
@@ -131,13 +129,22 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="flex-1 text-center text-xs font-semibold tracking-wider py-2 border border-black/40 hover:bg-black hover:text-[#f5f0e8] transition-colors"
+                    className="flex-1 text-center text-xs font-semibold tracking-wider py-2 border border-black/40 hover:bg-black hover:text-[#f5f0e8] transition-colors mobile:py-3.5"
                   >
                     VIEW DEMO
                   </a>
                 )}
               </div>
             </div>
+
+            {/* Phones have no Esc key and little backdrop to tap, so give them a close button */}
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="hidden mobile:flex absolute top-2 right-2 z-10 w-9 h-9 items-center justify-center rounded-full bg-black/10 text-black text-xl leading-none"
+            >
+              ×
+            </button>
           </motion.div>
         </motion.div>
       )}

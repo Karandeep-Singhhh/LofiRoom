@@ -39,7 +39,7 @@ export default function NeonSign({ text, className = '' }: NeonSignProps) {
         }}
         className="text-white tracking-wider"
         style={{
-          fontSize: 'clamp(1.6rem, 3.2vw, 3.2rem)',
+          fontSize: 'var(--sign-font-size, clamp(1.6rem, 3.2vw, 3.2rem))',
           letterSpacing: '0.15em',
         }}
       >
