@@ -41,11 +41,9 @@ export default function ProjectPoster({ project, onClick }: ProjectPosterProps) 
       <span
         className="text-white text-center leading-tight mt-1.5"
         style={{
-          fontFamily: 'var(--font-bungee), sans-serif',
           fontSize: 'var(--poster-font-size, 12px)',
           letterSpacing: '0.06em',
-          // Bungee's longest words (PREDICTOR, PORTFOLIO) run just past the poster width
-          maxWidth: 'calc(var(--poster-width, 80px) + 10px)',
+          maxWidth: 'var(--poster-width, 80px)',
         }}
       >
         {project.title}
